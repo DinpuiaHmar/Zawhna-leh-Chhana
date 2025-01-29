@@ -1,13 +1,6 @@
-import os
 import streamlit as st
 from deep_translator import GoogleTranslator
 import ollama  # Ollama Python client
-
-# Get Ollama API key from environment variables
-OLLAMA_API_KEY = os.getenv("OLLAMA_API_KEY")
-
-# Set the API key in Ollama (if the library supports this)
-ollama.set_api_key(OLLAMA_API_KEY)
 
 # Function to translate text
 def translate(text, source_lang, target_lang):
@@ -98,7 +91,7 @@ def main():
 
     # Title and description
     st.title("Zawhna leh Chhana")
-
+    st.secrets["OLLAMA_API_KEY"]
     # Input text box for Mizo question
     mizo_question = st.text_input("I zawhna te zawt rawh", placeholder="I zawhna ziak rawh...")
 
