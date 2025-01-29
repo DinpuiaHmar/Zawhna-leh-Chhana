@@ -1,6 +1,13 @@
+import os
 import streamlit as st
 from deep_translator import GoogleTranslator
 import ollama  # Ollama Python client
+
+# Get Ollama API key from environment variables
+OLLAMA_API_KEY = os.getenv("OLLAMA_API_KEY")
+
+# Set the API key in Ollama (if the library supports this)
+ollama.set_api_key(OLLAMA_API_KEY)
 
 # Function to translate text
 def translate(text, source_lang, target_lang):
@@ -10,7 +17,7 @@ def translate(text, source_lang, target_lang):
 # Function to generate an answer using Ollama
 def generate_answer_with_ollama(question):
     try:
-        # Use Ollama to generate an answer
+        # Use Ollama to generate an answer with deepseek-r1:1.5b
         response = ollama.generate(model="gemma2:2b", prompt=question)
         return response["response"]
     except Exception as e:
@@ -91,11 +98,6 @@ def main():
 
     # Title and description
     st.title("Zawhna leh Chhana")
-    st.markdown("""
-        <div style="text-align: center; font-size: 18px; color: #ffd700;">
-            I zawhna te zawt rawh, kan chhang thei ang.
-        </div>
-        """, unsafe_allow_html=True)
 
     # Input text box for Mizo question
     mizo_question = st.text_input("I zawhna te zawt rawh", placeholder="I zawhna ziak rawh...")
@@ -134,7 +136,7 @@ def main():
     st.markdown(
         """
         <div class="footer">
-            Created by <strong>Laldinpuia Hmar</strong> | Email: <a href="mailto:hmardinpuia2002@gmail.com">hmardinpuia2002@gmail.com</a> | Model: <strong>gemma2:2b</strong>
+            Developed by <strong>Laldinpuia Hmar</strong> | Email: <a href="mailto:hmardinpuia2002@gmail.com">hmardinpuia2002@gmail.com</a> | Model: <strong>gemma2:2b</strong>
         </div>
         """,
         unsafe_allow_html=True,
